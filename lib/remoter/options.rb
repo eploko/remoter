@@ -66,6 +66,18 @@ module Remoter
           puts opts
           exit 1
         end        
+        
+        unless options.task
+          puts 'Missing required argument --task or -t'
+          puts opts
+          exit 1
+        end
+
+        unless options.hosts
+          puts 'Missing required argument --hosts or -h'
+          puts opts
+          exit 1
+        end
       end
     end
   end
