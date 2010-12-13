@@ -8,5 +8,17 @@ module Remoter
       define_method(:status_code) { code }
     end
   end
+  
+  class << self
+    attr_writer :ui
+
+    def ui
+      @ui ||= UI.new
+    end
+
+    def read_file(file)
+      File.open(file, "rb") { |f| f.read }
+    end
+  end
 
 end
