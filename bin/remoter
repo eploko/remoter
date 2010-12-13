@@ -1,9 +1,16 @@
 #!/usr/bin/env ruby
 # encoding: utf-8
 
-require 'rubygems'
-require 'remoter/app'
+require 'remoter'
 
-app = Remoter::App.new
-app.run
-exit 0
+begin
+  Remoter::CLI.start
+rescue Remoter::RemoterError => e
+  puts "ERROR: #{e.message}"
+  puts "BACKTRACE:\n  #{e.backtrace.join("\n  ")}"
+  exit e.status_code
+rescue Interrupt => e
+  puts "\nQuitting..."
+  puts "BACKTRACE:\n  #{e.backtrace.join("\n  ")}"
+  exit 1
+end

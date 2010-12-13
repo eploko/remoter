@@ -16,8 +16,10 @@ module Remoter
       options.verbose = false
       options.hosts = nil
       options.exclude_targets = nil
+      options.ssh_port = 22
+      options.number_of_workers = 5
 
-      args.options do |opts|
+      args.options do |opts| 
         opts.banner = "Usage: remoter [options]"
         opts.program_name = "remoter"
         opts.version = Remoter::Version::STRING
@@ -26,7 +28,7 @@ module Remoter
         opts.separator "Required options:"
         
         opts.on("-t", "--task NAME", "Perform the given task") do |task|
-          options.task = name
+          options.task = task
         end        
 
         opts.on("-h", "--hosts TARGETS", 
@@ -40,6 +42,14 @@ module Remoter
         
         opts.on("--exclude TARGETS", "Exclude hosts/networks") do |exclude_targets|
           options.exclude_targets = exclude_targets
+        end
+        
+        opts.on("-p", "--ssh-port PORT", Integer, "SSH port number to use", "Default is #{options.ssh_port}") do |port|
+          options.ssh_port = port
+        end
+        
+        opts.on("-w", "--workers N", Integer, "SSH port number to use", "Default is #{options.number_of_workers}") do |n|
+          options.number_of_workers = n
         end
         
         opts.separator ""
@@ -79,6 +89,8 @@ module Remoter
           exit 1
         end
       end
+
+      options
     end
   end
 end
