@@ -5,9 +5,9 @@
 
 Gem::Specification.new do |s|
   s.name = %q{remoter}
-  s.version = "1.0.0"
+  s.version = "1.0.0.pre1"
 
-  s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
+  s.required_rubygems_version = Gem::Requirement.new("> 1.3.1") if s.respond_to? :required_rubygems_version=
   s.authors = ["Andrey Subbotin"]
   s.date = %q{2010-12-12}
   s.default_executable = ["remoter"]
@@ -21,8 +21,10 @@ Gem::Specification.new do |s|
   s.files = [
     "LICENSE",
     "README.rdoc",
-    "VERSION",
-    "lib/remoter/app.rb"
+    "lib/remoter/app.rb",
+    "lib/remoter/options.rb",
+    "lib/remoter/term_helpers.rb",
+    "lib/remoter/version.rb"
   ]
   s.homepage = %q{http://github.com/eploko/remoter}
   s.require_paths = ["lib"]

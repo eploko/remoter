@@ -5,8 +5,10 @@ require 'rake'
 
 begin
   require 'jeweler'
+  require './lib/remoter/version.rb'
   Jeweler::Tasks.new do |gem|
     gem.name = "remoter"
+    gem.version = Remoter::Version::STRING
     gem.summary = %Q{Run commands on multiple remote machines over SSH easily.}
     gem.description = %Q{A tool to simplify executing of shell command on several remote machines over SSH.}
     gem.email = "andrey@subbotin.me"
