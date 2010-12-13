@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+
+require 'rubygems'
+
+if __FILE__ == $0
+  app = Remoter::App.new
+  app.run
+  exit 0
+end
