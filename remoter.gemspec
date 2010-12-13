@@ -21,11 +21,8 @@ Gem::Specification.new do |s|
   s.files = [
     "LICENSE",
     "README.rdoc",
-    "Rakefile",
     "VERSION",
-    "bin/remoter",
-    "lib/remoter.rb",
-    "remoter.gemspec"
+    "lib/remoter/app.rb"
   ]
   s.homepage = %q{http://github.com/eploko/remoter}
   s.require_paths = ["lib"]

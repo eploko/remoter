@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 require 'fileutils'
 require 'term/ansicolor'
 
@@ -13,14 +15,13 @@ module Remoter
 
     def banner
       puts "Remoter v1.0.0"
-      puts "© 2010 Andrey Subbotin <andrey@subbotin.me>"
+      puts "(c) 2010 Andrey Subbotin <andrey@subbotin.me>"
     end
 
     def usage 
       puts ""
       puts "Usage: remoter [<task.remoter>]"
       puts ""
-      puts "<model>          = adhoc | appstore"
       puts "<task.remoter>   = remoter task file"   
     end
 

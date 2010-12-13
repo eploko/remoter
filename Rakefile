@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 require 'rubygems'
 require 'rake'
 
@@ -12,6 +14,7 @@ begin
     gem.authors = ["Andrey Subbotin"]
     gem.executables = ['remoter']
     gem.default_executable = ['remoter']    
+    gem.files =  FileList["[A-Z][A-Z]*", "lib/**/*"]
     gem.add_dependency "term-ansicolor"
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
