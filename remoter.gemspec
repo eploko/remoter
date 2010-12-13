@@ -18,6 +18,15 @@ Gem::Specification.new do |s|
     "LICENSE",
     "README.rdoc"
   ]
+  s.files = [
+    "LICENSE",
+    "README.rdoc",
+    "Rakefile",
+    "VERSION",
+    "bin/remoter",
+    "lib/remoter.rb",
+    "remoter.gemspec"
+  ]
   s.homepage = %q{http://github.com/eploko/remoter}
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.7}
