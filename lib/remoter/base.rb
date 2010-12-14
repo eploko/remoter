@@ -16,6 +16,7 @@ module Remoter
     class_option "no-color", :type => :boolean, :desc => "Disable colorization in output"
     class_option "verbose",  :type => :boolean, :desc => "Enable verbose output mode", :aliases => "-v"
     class_option "workers",  :type => :numeric, :desc => "Number of parallel SSH sessions", :aliases => "-w", :default => 5
+    class_option "username",  :type => :string, :desc => "Username to use for the SSH sessions", :aliases => "-u"
 
     protected
     
@@ -33,22 +34,20 @@ module Remoter
               Remoter.ui.debug "WORKER ##{worker_no}: Proceeding with #{targets.count} agents..."      
               while (target = targets.shift)
                 Remoter.ui.debug "WORKER ##{worker_no}: PROCESSING #{target.addr}..."
-                mission_completed = false
                 begin
-                  mission_completed = send Base.body_method_name(name), target
-                ensure
-                  unless mission_completed
-                    Remoter.ui.error "WORKER ##{worker_no}: FAILED for #{target.addr}... WILL RETRY"
-                    targets.push target
-                  else
-                    Remoter.ui.confirm "WORKER ##{worker_no}: SUCCEEDED for #{target.addr}"
-                  end
+                  send Base.body_method_name(name), Session.new(self, target)
+                rescue RemoterError => error
+                  Remoter.ui.error "WORKER ##{worker_no}: ERROR: #{error.message}"
+                  Remoter.ui.error "WORKER ##{worker_no}: FAILED for #{target.addr}... WILL RETRY"
+                  targets.push target
+                else
+                  Remoter.ui.confirm "WORKER ##{worker_no}: SUCEEDED for #{target.addr}"
                 end
               end
             end
           end
           workers.each { |pid| Process.wait(pid) }
-          Remoter.ui.confirm "All done!"
+          Remoter.ui.confirm "ALL DONE. KEWL."
         end
         no_tasks do
           define_method body_method_name(name), block
@@ -60,8 +59,9 @@ module Remoter
       end
   
       def nmap_args
-        result = "-sP #{options['targets'].join(',')}"
+        result = "-sP"
         result += " --exclude #{options['exclude'].join(',')}" if options['exclude']
+        result += " #{options['targets'].join(' ')}"
         result
       end
     
