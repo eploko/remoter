@@ -14,8 +14,8 @@ begin
     gem.email = "andrey@subbotin.me"
     gem.homepage = "http://github.com/eploko/remoter"
     gem.authors = ["Andrey Subbotin"]
-    gem.executables = ['remoter']
-    gem.default_executable = ['remoter']    
+    gem.executables = []
+    gem.default_executable = []    
     gem.files =  FileList["[A-Z][A-Z]*", "lib/**/*"]
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end

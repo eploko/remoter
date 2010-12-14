@@ -1,6 +1,6 @@
 module Remoter
   
-  autoload :CLI,  'remoter/cli'
+  autoload :Base,  'remoter/base'
   autoload :UI,   'remoter/ui'
 
   class RemoterError < StandardError
