@@ -28,20 +28,20 @@ module Remoter
           workers = []
           items_per_worker = (hosts.count.to_f / options['workers'].to_f).ceil
           hosts.each_slice(items_per_worker).to_a.each_with_index do |targets, worker_no|
-            Remoter.ui.info "WORKER ##{worker_no}: #{targets.count}"
+            Remoter.ui.debug "WORKER ##{worker_no}: #{targets.count}"
             workers << Process.fork do 
-              Remoter.ui.info "WORKER ##{worker_no}: Proceeding with #{targets.count} agents..."      
+              Remoter.ui.debug "WORKER ##{worker_no}: Proceeding with #{targets.count} agents..."      
               while (target = targets.shift)
-                Remoter.ui.info "WORKER ##{worker_no}: TARGET is at #{target.addr}..."
+                Remoter.ui.debug "WORKER ##{worker_no}: PROCESSING #{target.addr}..."
                 mission_completed = false
                 begin
                   mission_completed = send Base.body_method_name(name), target
                 ensure
                   unless mission_completed
-                    Remoter.ui.info "WORKER ##{worker_no}: FAILED for #{target.addr}... WILL RETRY"
+                    Remoter.ui.error "WORKER ##{worker_no}: FAILED for #{target.addr}... WILL RETRY"
                     targets.push target
                   else
-                    Remoter.ui.info "WORKER ##{worker_no}: SUCCEEDED for #{target.addr}"
+                    Remoter.ui.confirm "WORKER ##{worker_no}: SUCCEEDED for #{target.addr}"
                   end
                 end
               end
