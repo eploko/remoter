@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new("> 1.3.1") if s.respond_to? :required_rubygems_version=
   s.authors = ["Andrey Subbotin"]
-  s.date = %q{2010-12-13}
+  s.date = %q{2010-12-14}
   s.default_executable = []
   s.description = %q{A tool to simplify executing of shell command on several remote machines over SSH.}
   s.email = %q{andrey@subbotin.me}
@@ -22,6 +22,7 @@ Gem::Specification.new do |s|
     "README.rdoc",
     "lib/remoter.rb",
     "lib/remoter/base.rb",
+    "lib/remoter/session.rb",
     "lib/remoter/ui.rb",
     "lib/remoter/version.rb"
   ]
